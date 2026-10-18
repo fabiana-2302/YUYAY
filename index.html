@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUYAY | Memoria, Identidad, DDHH y Proyecto de Vida</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome & Phosphor Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            amber: '#f59e0b',
+                            orange: '#f97316',
+                            emerald: '#10b981',
+                            cyan: '#06b6d4',
+                            pink: '#ec4899',
+                            purple: '#8b5cf6',
+                            indigo: '#4f46e5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #faf8f5;
+            color: #1e293b;
+        }
+        
+        .section-hero-bg {
+            background-image: linear-gradient(180deg, rgba(250, 248, 245, 0.85) 0%, rgba(250, 248, 245, 0.95) 100%), 
+                              url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-ebook-bg {
+            background-image: linear-gradient(180deg, rgba(250, 248, 245, 0.88) 0%, rgba(250, 248, 245, 0.94) 100%), 
+                              url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-quiz-bg {
+            background-image: linear-gradient(180deg, rgba(250, 248, 245, 0.82) 0%, rgba(250, 248, 245, 0.88) 100%), 
+                              url('https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .section-muro-bg {
+            background-image: linear-gradient(180deg, rgba(250, 248, 245, 0.88) 0%, rgba(250, 248, 245, 0.96) 100%), 
+                              url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-lum-bg {
+            background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%), 
+                              url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .youth-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .youth-card-hover {
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .youth-card-hover:hover {
+            transform: translateY(-5px);
+            border-color: #f59e0b;
+            box-shadow: 0 20px 30px -10px rgba(245, 158, 11, 0.18);
+        }
+
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #d97706 0%, #ea580c 50%, #db2777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-slate-800 font-sans antialiased selection:bg-amber-200 selection:text-amber-950 min-h-screen flex flex-col overflow-x-hidden">
+
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">
+            Y
+          </div>
+          <div>
+            <span class="font-bold text-stone-800 tracking-tight text-lg">YUYAY</span>
+            <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded-full ml-2">GEN-Z DPCC</span>
+            <p class="text-[10px] text-stone-500 hidden sm:block">Memoria • Identidad • Futuro sin violencia</p>
+          </div>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-4 text-stone-600 text-sm">
+          <button onclick="openTerrorismSlide()" class="text-xs font-bold text-amber-800 bg-amber-100 hover:bg-amber-200 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition border border-amber-300 shadow-sm">
+            <i class="ph ph-book-open-text text-base"></i> HISTORIA DEL TERRORISMO
+          </button>
+          <button onclick="scrollToSection('ebook')" class="text-xs font-semibold hover:text-amber-600 flex items-center gap-1 transition">
+            <i class="ph ph-book-bookmark"></i> E-Book Z-Mag
+          </button>
+          <button onclick="scrollToSection('desafio')" class="text-xs font-semibold hover:text-amber-600 flex items-center gap-1 transition">
+            <i class="ph ph-game-controller"></i> DESAFÍO XP
+          </button>
+          <button onclick="scrollToSection('muro')" class="text-xs font-semibold hover:text-amber-600 flex items-center gap-1 transition">
+            <i class="ph ph-chats-teardrop"></i> MURO DE PAZ
+          </button>
+        </nav>
+
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow hover:opacity-90 transition flex items-center gap-1.5">
+          <i class="ph ph-instagram-logo text-base"></i> @yuyay.pe
+        </a>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+      <section class="section-hero-bg text-center py-12 sm:py-20 relative overflow-hidden rounded-3xl border border-amber-200/80 p-6 sm:p-12 shadow-sm">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-amber-100/90 text-amber-900 text-xs font-bold mb-6 border border-amber-300/60 shadow-sm backdrop-blur-md">
+          <span class="bg-amber-500 text-white px-2.5 py-0.5 rounded-full font-extrabold text-[11px] tracking-wide">#MemoriaViva</span>
+          <i class="ph ph-sparkle text-sm text-amber-600"></i>
+          <span>Plataforma Interactiva de Aprendizaje Ciudadano</span>
+        </div>
+        
+        <h1 class="text-6xl sm:text-8xl md:text-9xl font-black font-heading text-gradient-primary tracking-tight uppercase leading-none drop-shadow-sm mb-4">
+          YUYAY
+        </h1>
+        
+        <p class="text-lg sm:text-2xl font-bold font-heading text-slate-800 max-w-2xl mx-auto mb-4 leading-snug">
+          Aprender del pasado para <span class="underline decoration-amber-400 decoration-wavy underline-offset-4">construir el futuro</span>
+        </p>
+
+        <p class="mt-3 max-w-2xl mx-auto text-xs sm:text-base text-slate-700 leading-relaxed font-medium">
+          <strong>YUYAY</strong> ("Pensamiento y Memoria" en Quechua) es un espacio diseñado para la juventud peruana. Explora la historia del terrorismo (1980–2000), reflexiona sobre la democracia y desafía tus conocimientos con actividades interactivas.
+        </p>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <button onclick="openTerrorismSlide()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm px-6 py-3 rounded-2xl shadow-lg transition flex items-center gap-2 transform hover:-translate-y-0.5">
+            <i class="ph ph-presentation text-lg"></i> Historia del Terrorismo
+          </button>
+          <button onclick="openTerrorismSlideWithTab('entrevistas')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-sm px-6 py-3 rounded-2xl border border-amber-300 shadow-sm transition flex items-center gap-2 transform hover:-translate-y-0.5">
+            <i class="ph ph-microphone text-lg text-amber-600"></i> Escuchar Testimonios
+          </button>
+          <button onclick="scrollToSection('desafio')" class="bg-white hover:bg-stone-100 text-slate-800 font-bold text-sm px-6 py-3 rounded-2xl border border-stone-300 shadow-sm transition flex items-center gap-2 transform hover:-translate-y-0.5">
+            <i class="ph ph-game-controller text-lg text-amber-600"></i> Probar el Desafío XP
+          </button>
+        </div>
+      </section>
+
+      <section id="ebook" class="section-ebook-bg p-6 sm:p-10 rounded-3xl border border-stone-200/80 space-y-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2">
+          <div>
+            <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">Ecosistema Educativo</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-900">E-Book Z-Mag & Mini-Docs</h2>
+          </div>
+          <button onclick="showToast('Abriendo catálogo completo de recursos DPCC', 'info')" class="text-xs font-bold text-amber-600 hover:text-amber-700 underline flex items-center gap-1">
+            Ver catálogo completo <i class="ph ph-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="youth-card p-6 flex flex-col justify-between youth-card-hover">
+            <div>
+              <span class="text-[10px] font-extrabold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full uppercase">Revista Digital</span>
+              <h3 class="text-xl font-bold font-heading text-slate-900 mt-3">YUYAY Z-Mag: Edición Ciudadanía y Memoria</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Una guía visual interactiva con infografías, testimonios, análisis histórico y consejos para ejercer una ciudadanía activa libre de violencia.
+              </p>
+            </div>
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+              <span class="text-xs font-semibold text-slate-500"><i class="ph ph-file-pdf text-amber-600"></i> Formato PDF Interactivo</span>
+              <button onclick="downloadEbookPDF()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Descargar Z-Mag
+              </button>
+            </div>
+          </div>
+
+          <div class="youth-card p-6 flex flex-col justify-between youth-card-hover">
+            <div>
+              <span class="text-[10px] font-extrabold bg-cyan-100 text-cyan-800 px-2.5 py-1 rounded-full uppercase">Serie Audiovisual</span>
+              <h3 class="text-xl font-bold font-heading text-slate-900 mt-3">Mini-Documentales DPCC</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Episodios breves dirigidos a estudiantes para reflexionar sobre la convivencia democrática, la resiliencia comunitaria y el pensamiento crítico digital.
+              </p>
+            </div>
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+              <span class="text-xs font-semibold text-slate-500"><i class="ph ph-play-circle text-cyan-600"></i> 4 Episodios Disponibles</span>
+              <button onclick="openTerrorismSlideWithTab('videos')" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Ver Serie Mini-Docs
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="desafio" class="section-quiz-bg p-6 sm:p-10 rounded-3xl border border-stone-200/80 space-y-6">
+        <div class="text-center max-w-xl mx-auto space-y-2">
+          <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">Evaluación Gamificada</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-900">Desafío XP YUYAY</h2>
+          <p class="text-xs sm:text-sm text-slate-600">Pon a prueba tu conocimiento histórico y gana puntos de experiencia (XP).</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto youth-card p-6 sm:p-8 bg-white/95 relative shadow-lg">
+          <div id="quiz-card" class="space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div class="flex items-center gap-2">
+                <span id="quiz-type-badge" class="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-300">Opción Múltiple</span>
+                <span id="quiz-rank-label" class="text-xs text-slate-500">Rango: <span class="text-emerald-600 font-bold">Novato/a</span></span>
+              </div>
+              <span id="quiz-score-xp" class="text-sm font-extrabold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">0 XP</span>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs text-slate-500 font-semibold">
+                <span id="quiz-progress-text">Pregunta 1 de 5</span>
+                <span>Progreso</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div id="quiz-progress-bar" class="bg-amber-500 h-full rounded-full transition-all duration-300" style="width: 20%"></div>
+              </div>
+            </div>
+
+            <h3 id="quiz-question" class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+              Cargando pregunta...
+            </h3>
+
+            <div id="quiz-options" class="space-y-3"></div>
+
+            <div id="quiz-feedback" class="hidden p-4 rounded-2xl text-xs sm:text-sm border leading-relaxed"></div>
+
+            <div class="flex justify-end pt-2">
+              <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl transition flex items-center gap-2">
+                Siguiente Pregunta <i class="ph ph-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="quiz-results" class="hidden text-center py-8 space-y-6">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
+              <i class="ph ph-trophy"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-extrabold font-heading text-slate-900">¡Desafío Completado!</h3>
+              <p id="quiz-result-score" class="text-sm font-bold text-amber-600 mt-1">Obtuviste 0 XP</p>
+            </div>
+
+            <div id="quiz-result-badge" class="bg-stone-50 border border-stone-200 p-4 rounded-2xl max-w-md mx-auto text-xs text-slate-600 leading-relaxed"></div>
+
+            <button onclick="resetQuiz()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-6 py-3 rounded-xl transition inline-flex items-center gap-2">
+              <i class="ph ph-arrows-counter-clockwise"></i> Intentar Nuevamente
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="muro" class="section-muro-bg p-6 sm:p-10 rounded-3xl border border-stone-200/80 space-y-6">
+        <div class="text-center max-w-xl mx-auto space-y-2">
+          <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">Participación Estudiantil</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-900">Muro Colectivo de Paz</h2>
+          <p class="text-xs sm:text-sm text-slate-600">Deja tus compromisos de respeto, memoria y diálogo pacífico.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <form onsubmit="addWallMessage(event)" class="youth-card p-6 space-y-4 lg:col-span-1">
+            <h3 class="font-bold text-slate-900 text-sm">Publicar mi Compromiso</h3>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Nombre / Seudónimo</label>
+              <input type="text" id="wall-name" required placeholder="Ej. Alex R." class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Ciudad o Colegio</label>
+              <input type="text" id="wall-city" required placeholder="Ej. Huamanga / 5to B" class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 bg-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Tu Mensaje de Paz o Compromiso</label>
+              <textarea id="wall-text" required rows="3" placeholder="Mi compromiso con el Perú es..." class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 resize-none bg-white"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2 shadow">
+              <i class="ph ph-paper-plane-tilt"></i> Publicar en el Muro
+            </button>
+          </form>
+
+          <div id="wall-posts-grid" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+        </div>
+      </section>
+
+      <section class="section-lum-bg p-6 sm:p-10 rounded-3xl border border-slate-800 space-y-6 text-white shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-slate-900/80 border border-slate-700/80 p-6 rounded-2xl flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Recorrido Virtual Sugerido</span>
+              <h3 class="text-xl font-extrabold font-heading">Lugar de la Memoria (LUM)</h3>
+              <p class="text-xs text-stone-300 leading-relaxed">
+                Explora de forma virtual las exhibiciones sobre la historia de la violencia, la resiliencia ciudadana y la importancia de defender la democracia en el Perú.
+              </p>
+            </div>
+            <button onclick="showToast('Conectando con el catálogo virtual del LUM...', 'info')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-xs px-5 py-3 rounded-xl transition w-full flex items-center justify-center gap-2 shadow-lg">
+              <i class="ph ph-monument text-lg"></i> Ver Exhibiciones Virtuales LUM
+            </button>
+          </div>
+
+          <div class="bg-amber-950/40 border border-amber-600/40 p-6 rounded-2xl flex flex-col justify-between space-y-4 backdrop-blur-sm">
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider"><i class="ph ph-newspaper"></i> Especial Interactivo</span>
+              <h3 class="text-xl font-extrabold font-heading text-amber-100">Principales Atentados de Sendero Luminoso</h3>
+              <p class="text-xs text-amber-200/80 leading-relaxed">
+                Investigación especial e interactiva de El Comercio con mapa cronológico, infografías y testimonios de los atentados ocurridos en el país.
+              </p>
+            </div>
+            <a href="https://especiales.elcomercio.pe/?q=especiales/principales-atentados-sendero-luminoso-ecpm/index.html" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs px-5 py-3 rounded-xl transition w-full flex items-center justify-center gap-2 shadow-lg text-center">
+              <i class="ph ph-arrow-square-out text-lg"></i> Abrir Especial Interactivo
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 text-xs py-8 border-t border-stone-800 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+        <div class="flex justify-center items-center gap-2 text-white font-bold text-base">
+          <div class="w-6 h-6 bg-amber-500 rounded-lg flex items-center justify-center text-xs text-slate-950 font-black">Y</div>
+          YUYAY Gen-Z DPCC
+        </div>
+        <p>Plataforma educativa para el desarrollo personal, ciudadanía y construcción de memoria histórica reflexiva en el Perú.</p>
+        <p class="text-[10px] text-stone-500">© 2026 YUYAY - Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- MODAL HISTORIA DEL TERRORISMO -->
+    <div id="terrorism-slide-modal" class="fixed inset-0 z-50 bg-stone-900/80 backdrop-blur-md hidden transition-all duration-300 overflow-y-auto">
+      <div class="min-h-screen px-4 py-8 flex items-center justify-center">
+        <div class="bg-stone-50 border border-stone-200 w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+          
+          <div class="bg-stone-900 text-white p-6 flex justify-between items-center border-b border-stone-800">
+            <div class="flex items-center gap-3">
+              <div class="p-2 bg-amber-500/20 text-amber-400 rounded-lg">
+                <i class="ph ph-clock-counter-clockwise text-2xl"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold tracking-wider text-amber-400 uppercase">Diapositiva Interactiva</span>
+                <h2 class="text-xl font-bold">Historia del Terrorismo en el Perú (1980 - 2000)</h2>
+              </div>
+            </div>
+            <button onclick="closeTerrorismSlide()" class="p-2 text-stone-400 hover:text-white hover:bg-stone-800 rounded-lg transition">
+              <i class="ph ph-x text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- TAB NAVIGATION -->
+          <div class="bg-stone-200/70 p-2 flex gap-2 overflow-x-auto border-b border-stone-300 text-xs font-semibold">
+            <button onclick="switchTerrorismTab('historia')" id="tab-btn-historia" class="terrorism-tab-btn px-4 py-2 rounded-lg bg-white shadow-sm text-stone-900 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-timeline"></i> Cronología
+            </button>
+            <button onclick="switchTerrorismTab('datos')" id="tab-btn-datos" class="terrorism-tab-btn px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-chart-pie-slice"></i> Datos CVR
+            </button>
+            <button onclick="switchTerrorismTab('articulos')" id="tab-btn-articulos" class="terrorism-tab-btn px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-article"></i> Fuentes y Lecturas
+            </button>
+            <button onclick="switchTerrorismTab('entrevistas')" id="tab-btn-entrevistas" class="terrorism-tab-btn px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-microphone text-base text-amber-600"></i> Testimonios
+            </button>
+            <button onclick="switchTerrorismTab('videos')" id="tab-btn-videos" class="terrorism-tab-btn px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-youtube-logo text-base text-red-600"></i> Videos DPCC
+            </button>
+            <button onclick="switchTerrorismTab('chavin')" id="tab-btn-chavin" class="terrorism-tab-btn px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-shield-check text-base text-amber-600"></i> Chavín de Huántar
+            </button>
+            <button onclick="switchTerrorismTab('gein')" id="tab-btn-gein" class="terrorism-tab-btn px-4 py-2 rounded-lg text-stone-600 hover:bg-stone-100 flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ph ph-target text-base text-emerald-600"></i> Captura GEIN
+            </button>
+          </div>
+
+          <!-- Slide Content Area -->
+          <div class="p-6 overflow-y-auto flex-1 space-y-6">
+
+            <!-- TAB 1: CRONOLOGÍA HISTÓRICA -->
+            <div id="terrorism-tab-historia" class="terrorism-tab-content space-y-6">
+              <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                <h3 class="font-bold text-amber-900">El Proceso de Violencia Armada (1980–2000)</h3>
+                <p class="text-sm text-amber-800 mt-1">
+                  Entre 1980 y el año 2000, el Perú vivió el periodo de mayor violencia de su historia republicana, iniciado por las organizaciones terroristas Sendero Luminoso (PCP-SL) y el Movimiento Revolucionario Túpac Amaru (MRTA).
+                </p>
+              </div>
+
+              <div class="relative border-l-2 border-amber-300 ml-4 space-y-6">
+                <div class="relative pl-6">
+                  <span class="absolute -left-2.5 top-1 bg-amber-500 w-5 h-5 rounded-full border-4 border-white"></span>
+                  <span class="text-xs font-bold text-amber-600">17 de Mayo de 1980</span>
+                  <h4 class="font-bold text-stone-800">Inicio de las acciones terroristas en Chuschi (Ayacucho)</h4>
+                  <p class="text-sm text-stone-600 mt-1">Sendero Luminoso quema las ánimas electorales en Chuschi, declarando el inicio de la denominada "guerra popular".</p>
+                </div>
+                <div class="relative pl-6">
+                  <span class="absolute -left-2.5 top-1 bg-stone-700 w-5 h-5 rounded-full border-4 border-white"></span>
+                  <span class="text-xs font-bold text-stone-600">1984</span>
+                  <h4 class="font-bold text-stone-800">Aparición del MRTA y escalada del conflicto</h4>
+                  <p class="text-sm text-stone-600 mt-1">El Movimiento Revolucionario Túpac Amaru inicia atentados violentos, secuestros y extorsiones.</p>
+                </div>
+                <div class="relative pl-6">
+                  <span class="absolute -left-2.5 top-1 bg-rose-600 w-5 h-5 rounded-full border-4 border-white"></span>
+                  <span class="text-xs font-bold text-rose-600">16 de Julio de 1992</span>
+                  <h4 class="font-bold text-stone-800">Atentado en la Calle Tarata (Miraflores, Lima)</h4>
+                  <p class="text-sm text-stone-600 mt-1">Un coche bomba detonado por Sendero Luminoso causa la muerte de 25 personas y deja cientos de heridos.</p>
+                </div>
+                <div class="relative pl-6">
+                  <span class="absolute -left-2.5 top-1 bg-emerald-600 w-5 h-5 rounded-full border-4 border-white"></span>
+                  <span class="text-xs font-bold text-emerald-600">12 de Septiembre de 1992</span>
+                  <h4 class="font-bold text-stone-800">Captura del cabecilla terrorista Abimael Guzmán (GEIN)</h4>
+                  <p class="text-sm text-stone-600 mt-1">El Grupo Especial de Inteligencia (GEIN) logra la "Captura del Siglo" sin disparar un solo tiro en Surquillo.</p>
+                </div>
+                <div class="relative pl-6">
+                  <span class="absolute -left-2.5 top-1 bg-blue-600 w-5 h-5 rounded-full border-4 border-white"></span>
+                  <span class="text-xs font-bold text-blue-600">2001 - 2003</span>
+                  <h4 class="font-bold text-stone-800">Comisión de la Verdad y Reconciliación (CVR)</h4>
+                  <p class="text-sm text-stone-600 mt-1">Informe Final que documentó la magnitud del conflicto, honró el recuerdo de las víctimas y formuló recomendaciones para la reparación integral.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: DATOS Y PORCENTAJES -->
+            <div id="terrorism-tab-datos" class="terrorism-tab-content space-y-6 hidden">
+              <h3 class="font-bold text-stone-800 text-lg">Cifras Impactantes del Informe CVR</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="bg-rose-50 border border-rose-200 p-4 rounded-xl text-center">
+                  <span class="text-3xl font-extrabold text-rose-600">69,280</span>
+                  <p class="text-xs font-bold text-stone-700 mt-1">Víctimas fatales estimadas</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-center">
+                  <span class="text-3xl font-extrabold text-amber-600">54%</span>
+                  <p class="text-xs font-bold text-stone-700 mt-1">Atribuible a Sendero Luminoso</p>
+                </div>
+                <div class="bg-stone-100 border border-stone-300 p-4 rounded-xl text-center">
+                  <span class="text-3xl font-extrabold text-stone-700">1.5%</span>
+                  <p class="text-xs font-bold text-stone-700 mt-1">Atribuible al MRTA</p>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-center">
+                  <span class="text-3xl font-extrabold text-emerald-600">79%</span>
+                  <p class="text-xs font-bold text-stone-700 mt-1">Víctimas en Zonas Rurales</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl text-center">
+                  <span class="text-3xl font-extrabold text-blue-600">75%</span>
+                  <p class="text-xs font-bold text-stone-700 mt-1">Quechuahablantes / Lengua Nativa</p>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-center">
+                  <span class="text-3xl font-extrabold text-indigo-600">40%</span>
+                  <p class="text-xs font-bold text-stone-700 mt-1">Víctimas en Ayacucho</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: ARTÍCULOS E INVESTIGACIÓN -->
+            <div id="terrorism-tab-articulos" class="terrorism-tab-content space-y-4 hidden">
+              <h3 class="font-bold text-stone-800 text-lg">Lecturas y Enlaces Académicos Recomendados</h3>
+              <div class="space-y-3">
+                <a href="https://lum.cultura.pe" target="_blank" rel="noopener" class="block p-4 rounded-xl border border-stone-200 bg-white hover:border-amber-400 transition">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 text-sm">Lugar de la Memoria, la Tolerancia y la Inclusión Social (LUM)</span>
+                    <i class="ph ph-arrow-square-out text-amber-600"></i>
+                  </div>
+                  <p class="text-xs text-stone-500 mt-1">Portal oficial del Ministerio de Cultura para el aprendizaje histórico y pedagógico.</p>
+                </a>
+                <a href="https://www.cverdad.org.pe" target="_blank" rel="noopener" class="block p-4 rounded-xl border border-stone-200 bg-white hover:border-amber-400 transition">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 text-sm">Informe Final de la CVR (Comisión de la Verdad y Reconciliación)</span>
+                    <i class="ph ph-arrow-square-out text-amber-600"></i>
+                  </div>
+                  <p class="text-xs text-stone-500 mt-1">Acceso al repositorio completo de conclusiones, hallazgos y tomos temáticos.</p>
+                </a>
+                <a href="https://idehpucp.pucp.edu.pe" target="_blank" rel="noopener" class="block p-4 rounded-xl border border-stone-200 bg-white hover:border-amber-400 transition">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-800 text-sm">Instituto de Democracia y Derechos Humanos (IDEHPUCP)</span>
+                    <i class="ph ph-arrow-square-out text-amber-600"></i>
+                  </div>
+                  <p class="text-xs text-stone-500 mt-1">Artículos académicos, investigaciones sobre memoria e institucionalidad democrática.</p>
+                </a>
+              </div>
+            </div>
+
+            <!-- TAB 4: TESTIMONIOS DIRECTOS -->
+            <div id="terrorism-tab-entrevistas" class="terrorism-tab-content space-y-6 hidden">
+              <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                  <i class="ph ph-microphone text-lg text-amber-600"></i> Testimonios de Víctimas y Héroes
+                </h3>
+                <p class="text-xs text-amber-800 mt-1">
+                  Relatos documentados para preservar la verdad, el valor de los defensores de la paz y la memoria de las víctimas.
+                </p>
+              </div>
+
+              <!-- VIDEOS TESTIMONIALES -->
+              <div class="space-y-4">
+                <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <i class="ph ph-video text-amber-600 text-lg"></i> Testimonios en Video
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Video Testimonio 1 -->
+                  <div class="bg-white border border-stone-200 p-3.5 rounded-2xl space-y-3 shadow-sm hover:border-amber-300 transition">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden shadow-inner">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/REtndWA2Q7Y" title="Testimonio de Belza Escobar Quispe y Felícitas Quispe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div>
+                      <span class="text-[10px] font-extrabold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full uppercase">Huancavelica / LUM</span>
+                      <h5 class="font-bold text-xs text-slate-900 mt-1.5">Testimonio de Belza Escobar y Felícitas Quispe</h5>
+                      <p class="text-[11px] text-stone-600 mt-1 leading-relaxed">
+                        Relato ante la CVR sobre la desaparición del líder social y defensor de DDHH Ángel Escobar Jurado en Huancavelica.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Video Testimonio 2 -->
+                  <div class="bg-white border border-stone-200 p-3.5 rounded-2xl space-y-3 shadow-sm hover:border-amber-300 transition">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden shadow-inner">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/XzLMg-oxRzk" title="Testimonios de Valor - Operación Chavín de Huántar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div>
+                      <span class="text-[10px] font-extrabold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full uppercase">Fuerzas Armadas / Comandos</span>
+                      <h5 class="font-bold text-xs text-slate-900 mt-1.5">Testimonios de Valor: Operación Chavín de Huántar</h5>
+                      <p class="text-[11px] text-stone-600 mt-1 leading-relaxed">
+                        Testimonios directos de los comandos y familiares de los héroes del rescate de rehenes en la embajada de Japón.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Citas escritas -->
+              <div class="space-y-3 pt-2">
+                <div class="bg-white p-5 rounded-2xl border border-stone-200 space-y-2 shadow-sm relative overflow-hidden">
+                  <div class="absolute top-0 left-0 w-1.5 h-full bg-amber-500"></div>
+                  <h5 class="font-bold text-xs text-slate-900 flex items-center justify-between">
+                    <span>Organización Comunitaria y Ronderos</span>
+                    <span class="text-[10px] text-stone-400 font-normal">Ayacucho / Junín</span>
+                  </h5>
+                  <p class="text-xs text-stone-700 italic leading-relaxed">
+                    "Las comunidades campesinas y las rondas autodefensas fueron el escudo principal para defender la democracia y la integridad de sus tierras."
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 5: VIDEOS EDUCACION -->
+            <div id="terrorism-tab-videos" class="terrorism-tab-content space-y-4 hidden">
+              <h3 class="font-bold text-stone-800 text-lg">Contenido Audiovisual Educativo</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                  <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/jWhBaymGrR4" title="Documental LUM" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                  <h5 class="font-bold text-xs text-slate-900">Memorias de Uchuraccay</h5>
+                  <p class="text-[11px] text-stone-500">Resiliencia comunal e historia local.</p>
+                </div>
+                <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                  <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/1mJs_1FBk30" title="Testimonio LUM" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                  <h5 class="font-bold text-xs text-slate-900">Archivo de Testimonios CVR</h5>
+                  <p class="text-[11px] text-stone-500">Memoria, dignidad y reparación institucional.</p>
+                </div>
+                <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                  <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/7p0R2RrjW8U" title="Confesiones Podcast Chavín de Huántar" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                  <h5 class="font-bold text-xs text-slate-900">Análisis Operación Chavín de Huántar</h5>
+                  <p class="text-[11px] text-stone-500">Podcast documental sobre el rescate.</p>
+                </div>
+                <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                  <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/WjD-c87u4d8" title="Entrevista Comandos" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                  <h5 class="font-bold text-xs text-slate-900">Entrevista a los Comandos del Rescate</h5>
+                  <p class="text-[11px] text-stone-500">Archivo periodístico internacional sobre el operativo.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 6: OPERACIÓN CHAVÍN DE HUÁNTAR -->
+            <div id="terrorism-tab-chavin" class="terrorism-tab-content space-y-4 hidden">
+              <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl">
+                <h3 class="font-bold text-amber-900 text-base">Operación Chavín de Huántar (22 de abril de 1997)</h3>
+                <p class="text-xs text-amber-800 mt-1">
+                  Rescate militar calificado como uno de los más exitosos del mundo, liberando a 71 rehenes retenidos por el grupo terrorista MRTA en la embajada de Japón.
+                </p>
+              </div>
+
+              <!-- VIDEOS CHAVIN DE HUANTAR -->
+              <div class="space-y-3">
+                <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <i class="ph ph-youtube-logo text-red-600 text-lg"></i> Documentales y Entrevistas: Chavín de Huántar
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/WjD-c87u4d8" title="Entrevista Comandos Chavín de Huántar" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <h5 class="font-bold text-xs text-slate-900">Entrevista a Comandos Chavín de Huántar</h5>
+                    <p class="text-[11px] text-stone-500">Testimonio periodístico sobre la planificación y ejecución del rescate.</p>
+                  </div>
+                  <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/7p0R2RrjW8U" title="El mejor rescate de rehenes del mundo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <h5 class="font-bold text-xs text-slate-900">El Mejor Rescate de Rehenes del Mundo</h5>
+                    <p class="text-[11px] text-stone-500">Documental en formato podcast sobre la operación militar.</p>
+                  </div>
+                </div>
+              </div>
+
+              <ul class="text-xs text-slate-700 space-y-2 list-disc pl-5 pt-2">
+                <li><strong>Secuestro:</strong> El MRTA tomó la residencia del embajador japonés en diciembre de 1996.</li>
+                <li><strong>Estrategia:</strong> Construcción de túneles subterráneos inspirados en el complejo arqueológico Chavín de Huántar.</li>
+                <li><strong>Héroes Nacionales:</strong> Los comandos de las Fuerzas Armadas y los rehenes fallecidos como el vocal Carlos Giusti y los comandos Juan Valer y Raúl Jiménez.</li>
+              </ul>
+            </div>
+
+            <!-- TAB 7: GEIN CAPTURA DEL SIGLO -->
+            <div id="terrorism-tab-gein" class="terrorism-tab-content space-y-4 hidden">
+              <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
+                <h3 class="font-bold text-emerald-900 text-base">GEIN: La Captura del Siglo (12 de Septiembre de 1992)</h3>
+                <p class="text-xs text-emerald-800 mt-1">
+                  Operación "Victoria" llevada a cabo por el Grupo Especial de Inteligencia de la Policía Nacional del Perú (PNP).
+                </p>
+              </div>
+
+              <!-- VIDEOS GEIN -->
+              <div class="space-y-3">
+                <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <i class="ph ph-youtube-logo text-red-600 text-lg"></i> Documentales e Historia: GEIN
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <!-- Video GEIN 1 -->
+                  <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/zEavoZfqyiI" title="Operación Victoria GEIN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h5 class="font-bold text-xs text-slate-900">Operación Victoria - Documental GEIN</h5>
+                    <p class="text-[11px] text-stone-500">Detalles de la investigación de inteligencia policial que derivó en la caída del terrorismo.</p>
+                  </div>
+                  <!-- Video GEIN 2 -->
+                  <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/yL39qfIc30c" title="Captura de Abimael Guzmán GEIN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h5 class="font-bold text-xs text-slate-900">La Captura del Siglo</h5>
+                    <p class="text-[11px] text-stone-500">Historia y testimonio de los agentes del GEIN en la intervención de Surquillo.</p>
+                  </div>
+                  <!-- Video GEIN 3 -->
+                  <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
+                    <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
+                      <iframe class="w-full h-full" src="https://www.youtube.com/embed/jkF7mRZ62Qo" title="Agentes del GEIN testimonio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h5 class="font-bold text-xs text-slate-900">Estrategia y Triunfo de la Paz</h5>
+                    <p class="text-[11px] text-stone-500">El trabajo paciente de inteligencia sin disparar un solo proyectil.</p>
+                  </div>
+                </div>
+              </div>
+
+              <ul class="text-xs text-slate-700 space-y-2 list-disc pl-5 pt-2">
+                <li><strong>Inteligencia Estratégica:</strong> Trabajo de seguimiento paciente liderado por los comandantes Benedicto Jiménez y Marco Miyashiro.</li>
+                <li><strong>Sin Violencia:</strong> Captura en Surquillo del líder máximo de Sendero Luminoso, Abimael Guzmán, sin disparar un solo proyectil.</li>
+                <li><strong>Inspiración Ciudadana:</strong> Ejemplo de cómo el profesionalismo policial y el Estado de Derecho vencieron al terrorismo.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // QUIZ DATA
+        const quizQuestions = [
+            {
+                type: "multiple",
+                question: "¿En qué año y localidad inició Sendero Luminoso sus acciones terroristas en el Perú?",
+                options: [
+                    "1980 en Chuschi (Ayacucho)",
+                    "1992 en Miraflores (Lima)",
+                    "1984 en Huancayo (Junín)",
+                    "1975 en Cusco"
+                ],
+                correct: 0,
+                explanation: "El 17 de mayo de 1980, en Chuschi (Ayacucho), Sendero Luminoso quemó las ánimas electorales marcando el inicio de su accionar terrorista."
+            },
+            {
+                type: "multiple",
+                question: "¿Qué unidad de la PNP logró la 'Captura del Siglo' del cabecilla Abimael Guzmán?",
+                options: [
+                    "GEIN (Grupo Especial de Inteligencia)",
+                    "SUAT",
+                    "UDEX",
+                    "DIRINCRI"
+                ],
+                correct: 0,
+                explanation: "El Grupo Especial de Inteligencia (GEIN) de la PNP logró la captura estratégica pacífica de Abimael Guzmán el 12 de septiembre de 1992."
+            },
+            {
+                type: "multiple",
+                question: "Según el Informe de la CVR, ¿qué porcentaje aproximado de las víctimas del conflicto eran hablantes de una lengua nativa (principalmente quechua)?",
+                options: [
+                    "75%",
+                    "25%",
+                    "10%",
+                    "50%"
+                ],
+                correct: 0,
+                explanation: "El 75% de las víctimas fatales tenían como lengua materna el quechua u otra lengua autóctona, evidenciando el fuerte impacto en zonas rurales e indígenas."
+            },
+            {
+                type: "multiple",
+                question: "¿En qué consistió la Operación 'Chavín de Huántar' en 1997?",
+                options: [
+                    "Rescate de rehenes de la embajada de Japón tomada por el MRTA",
+                    "Construcción de una carretera en la sierra central",
+                    "Una ley de amnistía ciudadana",
+                    "Un plan de alfabetización rural"
+                ],
+                correct: 0,
+                explanation: "Fue la exitosa operación de rescate militar que liberó a los rehenes secuestrados por el MRTA en la Residencia del Embajador de Japón."
+            },
+            {
+                type: "multiple",
+                question: "¿Cuál es el propósito fundamental de estudiar la historia de la violencia en el curso DPCC?",
+                options: [
+                    "Fortalecer la democracia, la memoria histórica y promover el 'Nunca Más'",
+                    "Aprender tácticas militares",
+                    "Generar divisiones y desacuerdos",
+                    "Memorizar cifras sin reflexión"
+                ],
+                correct: 0,
+                explanation: "El objetivo es construir ciudadanía consciente, valorar los DDHH y garantizar la paz y el diálogo pacífico."
+            }
+        ];
+
+        let currentQuestionIdx = 0;
+        let totalXP = 0;
+        let userSelectedOption = null;
+
+        // WALL POSTS INITIAL DATA
+        let wallPosts = [
+            { name: "Lucía M.", city: "Lima / 5to de Sec.", text: "Mi compromiso es valorar la democracia y dialogar en vez de agredir. #NuncaMás", date: "Hace 10 min" },
+            { name: "Gabriel K.", city: "Ayacucho / Colegio Mariscal Caceres", text: "Honrar la memoria de nuestras comunidades rurales trabajando por el desarrollo de mi región.", date: "Hace 1 hora" },
+            { name: "Valeria C.", city: "Arequipa", text: "Aprender historia nos protege de manipular el futuro. ¡Viva la paz en el Perú!", date: "Hace 3 horas" }
+        ];
+
+        // INIT APP
+        window.addEventListener('DOMContentLoaded', () => {
+            renderQuestion();
+            renderWallPosts();
+        });
+
+        // TOAST SYSTEM
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl shadow-xl text-xs font-bold flex items-center gap-2 text-white transition-all duration-300 transform translate-y-2 opacity-0 ${type === 'success' ? 'bg-emerald-600' : 'bg-amber-600'}`;
+            toast.innerHTML = `<i class="ph ${type === 'success' ? 'ph-check-circle' : 'ph-info'} text-lg"></i> ${message}`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // SCROLL HELPER
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // QUIZ FUNCTIONS
+        function renderQuestion() {
+            const q = quizQuestions[currentQuestionIdx];
+            document.getElementById('quiz-progress-text').innerText = `Pregunta ${currentQuestionIdx + 1} de ${quizQuestions.length}`;
+            document.getElementById('quiz-progress-bar').style.width = `${((currentQuestionIdx + 1) / quizQuestions.length) * 100}%`;
+            document.getElementById('quiz-question').innerText = q.question;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            userSelectedOption = null;
+
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border border-stone-200 hover:border-amber-400 hover:bg-amber-50/50 transition font-medium text-xs sm:text-sm flex items-center justify-between";
+                btn.onclick = () => selectOption(idx);
+                btn.innerHTML = `<span>${opt}</span> <i class="ph ph-circle text-stone-300 text-base"></i>`;
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(index) {
+            if (userSelectedOption !== null) return;
+            userSelectedOption = index;
+
+            const q = quizQuestions[currentQuestionIdx];
+            const optionsBtns = document.getElementById('quiz-options').children;
+            const feedbackEl = document.getElementById('quiz-feedback');
+
+            if (index === q.correct) {
+                totalXP += 100;
+                document.getElementById('quiz-score-xp').innerText = `${totalXP} XP`;
+                optionsBtns[index].className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm flex items-center justify-between";
+                optionsBtns[index].querySelector('i').className = "ph ph-check-circle text-emerald-600 text-lg";
+                
+                feedbackEl.className = "p-4 rounded-2xl text-xs sm:text-sm border bg-emerald-50 border-emerald-200 text-emerald-900 leading-relaxed";
+                feedbackEl.innerHTML = `<strong>¡Correcto! (+100 XP)</strong><br>${q.explanation}`;
+                showToast("¡Respuesta Correcta! +100 XP", "success");
+            } else {
+                optionsBtns[index].className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-xs sm:text-sm flex items-center justify-between";
+                optionsBtns[index].querySelector('i').className = "ph ph-x-circle text-rose-600 text-lg";
+
+                optionsBtns[q.correct].className = "w-full text-left p-4 rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm flex items-center justify-between";
+
+                feedbackEl.className = "p-4 rounded-2xl text-xs sm:text-sm border bg-rose-50 border-rose-200 text-rose-900 leading-relaxed";
+                feedbackEl.innerHTML = `<strong>Respuesta Incorrecta.</strong><br>${q.explanation}`;
+            }
+
+            feedbackEl.classList.remove('hidden');
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIdx < quizQuestions.length - 1) {
+                currentQuestionIdx++;
+                renderQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('quiz-result-score').innerText = `Obtuviste un total de ${totalXP} XP de 500 XP posibles.`;
+            
+            let rank = "Líder Ciudadano Gen-Z";
+            if (totalXP < 300) rank = "Aprendiz de Memoria";
+            
+            document.getElementById('quiz-result-badge').innerHTML = `
+                <p class="font-extrabold text-slate-800 text-sm">Insignia Obtenida: <span class="text-amber-600">${rank}</span></p>
+                <p class="mt-1">¡Gracias por participar! Continúa difundiendo el aprendizaje de la ciudadanía democrática.</p>
+            `;
+        }
+
+        function resetQuiz() {
+            currentQuestionIdx = 0;
+            totalXP = 0;
+            document.getElementById('quiz-score-xp').innerText = "0 XP";
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        // WALL FUNCTIONS
+        function renderWallPosts() {
+            const grid = document.getElementById('wall-posts-grid');
+            grid.innerHTML = '';
+            wallPosts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = "youth-card p-5 space-y-2 border-l-4 border-amber-500 flex flex-col justify-between";
+                card.innerHTML = `
+                    <p class="text-xs text-slate-700 italic">"${post.text}"</p>
+                    <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-[10px] text-slate-500">
+                        <span class="font-bold text-amber-800">${post.name} (${post.city})</span>
+                        <span>${post.date}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addWallMessage(e) {
+            e.preventDefault();
+            const name = document.getElementById('wall-name').value;
+            const city = document.getElementById('wall-city').value;
+            const text = document.getElementById('wall-text').value;
+
+            wallPosts.unshift({ name, city, text, date: "Ahora mismo" });
+            renderWallPosts();
+
+            document.getElementById('wall-name').value = '';
+            document.getElementById('wall-city').value = '';
+            document.getElementById('wall-text').value = '';
+
+            showToast("¡Tu compromiso ha sido publicado en el Muro!");
+        }
+
+        // EBOOK PDF SIMULATION
+        function downloadEbookPDF() {
+            showToast("Generando descarga del E-Book YUYAY (PDF)...", "info");
+            setTimeout(() => {
+                showToast("¡Descarga iniciada con éxito!");
+            }, 1200);
+        }
+
+        // MODAL SLIDE FUNCTIONS
+        function openTerrorismSlide() {
+            document.getElementById('terrorism-slide-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openTerrorismSlideWithTab(tabId) {
+            openTerrorismSlide();
+            switchTerrorismTab(tabId);
+        }
+
+        function closeTerrorismSlide() {
+            document.getElementById('terrorism-slide-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchTerrorismTab(tabId) {
+            const contents = document.querySelectorAll('.terrorism-tab-content');
+            contents.forEach(c => c.classList.add('hidden'));
+
+            const buttons = document.querySelectorAll('.terrorism-tab-btn');
+            buttons.forEach(b => {
+                b.classList.remove('bg-white', 'shadow-sm', 'text-stone-900');
+                b.classList.add('text-stone-600');
+            });
+
+            const activeContent = document.getElementById(`terrorism-tab-${tabId}`);
+            if (activeContent) activeContent.classList.remove('hidden');
+
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-white', 'shadow-sm', 'text-stone-900');
+                activeBtn.classList.remove('text-stone-600');
+            }
+        }
+    </script>
+</body>
+</html>
