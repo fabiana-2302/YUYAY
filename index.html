@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
+        // Configuración personalizada de Tailwind CSS para colores de marca y tipografías
         tailwind.config = {
             theme: {
                 extend: {
@@ -38,6 +39,7 @@
         }
     </script>
     <style>
+        /* Estilos base y fondos con superposición de degradado */
         body {
             background-color: #faf8f5;
             color: #1e293b;
@@ -79,6 +81,7 @@
             background-position: center;
         }
 
+        /* Tarjetas con efecto glassmorphism y bordes suaves */
         .youth-card {
             background: rgba(255, 255, 255, 0.95);
             border: 2px solid #e2e8f0;
@@ -106,8 +109,10 @@
 </head>
 <body class="text-slate-800 font-sans antialiased selection:bg-amber-200 selection:text-amber-950 min-h-screen flex flex-col overflow-x-hidden">
 
+    <!-- Contenedor para notificaciones flotantes (Toast) -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
+    <!-- Barra de navegación principal -->
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -144,6 +149,7 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
 
+      <!-- SECCIÓN HERO -->
       <section class="section-hero-bg text-center py-12 sm:py-20 relative overflow-hidden rounded-3xl border border-amber-200/80 p-6 sm:p-12 shadow-sm">
         <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-amber-100/90 text-amber-900 text-xs font-bold mb-6 border border-amber-300/60 shadow-sm backdrop-blur-md">
           <span class="bg-amber-500 text-white px-2.5 py-0.5 rounded-full font-extrabold text-[11px] tracking-wide">#MemoriaViva</span>
@@ -176,6 +182,7 @@
         </div>
       </section>
 
+      <!-- SECCIÓN E-BOOK Z-MAG & MINI-DOCS -->
       <section id="ebook" class="section-ebook-bg p-6 sm:p-10 rounded-3xl border border-stone-200/80 space-y-6">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2">
           <div>
@@ -188,40 +195,51 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Tarjeta Revista Digital Z-Mag con enlace directo a FlippingBook -->
           <div class="youth-card p-6 flex flex-col justify-between youth-card-hover">
             <div>
               <span class="text-[10px] font-extrabold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full uppercase">Revista Digital</span>
-              <h3 class="text-xl font-bold font-heading text-slate-900 mt-3">YUYAY Z-Mag: Edición Ciudadanía y Memoria</h3>
+              <h3 class="text-xl font-bold font-heading text-slate-900 mt-3">
+                <a href="https://online.flippingbook.com/view/599244432/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition">
+                  YUYAY Z-Mag: Edición Ciudadanía y Memoria
+                </a>
+              </h3>
               <p class="text-xs text-slate-600 mt-2 leading-relaxed">
                 Una guía visual interactiva con infografías, testimonios, análisis histórico y consejos para ejercer una ciudadanía activa libre de violencia.
               </p>
             </div>
             <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
-              <span class="text-xs font-semibold text-slate-500"><i class="ph ph-file-pdf text-amber-600"></i> Formato PDF Interactivo</span>
-              <button onclick="downloadEbookPDF()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
-                Descargar Z-Mag
-              </button>
+              <span class="text-xs font-semibold text-slate-500"><i class="ph ph-book-open text-amber-600"></i> Revista Interactiva Online</span>
+              <a href="https://online.flippingbook.com/view/599244432/" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                <i class="ph ph-arrow-square-out text-sm"></i> Abrir Z-Mag
+              </a>
             </div>
           </div>
 
+          <!-- Tarjeta Serie Audiovisual -->
           <div class="youth-card p-6 flex flex-col justify-between youth-card-hover">
             <div>
               <span class="text-[10px] font-extrabold bg-cyan-100 text-cyan-800 px-2.5 py-1 rounded-full uppercase">Serie Audiovisual</span>
-              <h3 class="text-xl font-bold font-heading text-slate-900 mt-3">Mini-Documentales DPCC</h3>
+              <h3 class="text-xl font-bold font-heading text-slate-900 mt-3">
+                <a href="https://www.instagram.com/yuyayproject?dlrf=ZDAzbzVlNmd2NjN6" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-600 transition">
+                  Mini-Documentales DPCC
+                </a>
+              </h3>
               <p class="text-xs text-slate-600 mt-2 leading-relaxed">
                 Episodios breves dirigidos a estudiantes para reflexionar sobre la convivencia democrática, la resiliencia comunitaria y el pensamiento crítico digital.
               </p>
             </div>
             <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
-              <span class="text-xs font-semibold text-slate-500"><i class="ph ph-play-circle text-cyan-600"></i> 4 Episodios Disponibles</span>
-              <button onclick="openTerrorismSlideWithTab('videos')" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
-                Ver Serie Mini-Docs
-              </button>
+              <span class="text-xs font-semibold text-slate-500"><i class="ph ph-instagram-logo text-cyan-600"></i> Episodios en Instagram</span>
+              <a href="https://www.instagram.com/yuyayproject?dlrf=ZDAzbzVlNmd2NjN6" target="_blank" rel="noopener noreferrer" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                <i class="ph ph-arrow-square-out text-sm"></i> Ver Serie Mini-Docs
+              </a>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- SECCIÓN DESAFÍO XP (QUIZ GAMIFICADO) -->
       <section id="desafio" class="section-quiz-bg p-6 sm:p-10 rounded-3xl border border-stone-200/80 space-y-6">
         <div class="text-center max-w-xl mx-auto space-y-2">
           <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">Evaluación Gamificada</span>
@@ -282,6 +300,7 @@
         </div>
       </section>
 
+      <!-- SECCIÓN MURO COLECTIVO DE PAZ -->
       <section id="muro" class="section-muro-bg p-6 sm:p-10 rounded-3xl border border-stone-200/80 space-y-6">
         <div class="text-center max-w-xl mx-auto space-y-2">
           <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">Participación Estudiantil</span>
@@ -313,6 +332,7 @@
         </div>
       </section>
 
+      <!-- SECCIÓN LUM Y ESPECIAL INTERACTIVO -->
       <section class="section-lum-bg p-6 sm:p-10 rounded-3xl border border-slate-800 space-y-6 text-white shadow-xl">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-slate-900/80 border border-slate-700/80 p-6 rounded-2xl flex flex-col justify-between space-y-4">
@@ -344,6 +364,7 @@
       </section>
     </main>
 
+    <!-- PIE DE PÁGINA -->
     <footer class="bg-stone-900 text-stone-400 text-xs py-8 border-t border-stone-800 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
         <div class="flex justify-center items-center gap-2 text-white font-bold text-base">
@@ -375,7 +396,7 @@
             </button>
           </div>
 
-          <!-- TAB NAVIGATION -->
+          <!-- PESTAÑAS DE NAVEGACIÓN DEL MODAL -->
           <div class="bg-stone-200/70 p-2 flex gap-2 overflow-x-auto border-b border-stone-300 text-xs font-semibold">
             <button onclick="switchTerrorismTab('historia')" id="tab-btn-historia" class="terrorism-tab-btn px-4 py-2 rounded-lg bg-white shadow-sm text-stone-900 flex items-center gap-1.5 whitespace-nowrap">
               <i class="ph ph-timeline"></i> Cronología
@@ -400,7 +421,7 @@
             </button>
           </div>
 
-          <!-- Slide Content Area -->
+          <!-- ÁREA DE CONTENIDO DEL MODAL -->
           <div class="p-6 overflow-y-auto flex-1 space-y-6">
 
             <!-- TAB 1: CRONOLOGÍA HISTÓRICA -->
@@ -522,7 +543,6 @@
                   <i class="ph ph-video text-amber-600 text-lg"></i> Testimonios en Video
                 </h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <!-- Video Testimonio 1 -->
                   <div class="bg-white border border-stone-200 p-3.5 rounded-2xl space-y-3 shadow-sm hover:border-amber-300 transition">
                     <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden shadow-inner">
                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/REtndWA2Q7Y" title="Testimonio de Belza Escobar Quispe y Felícitas Quispe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -536,7 +556,6 @@
                     </div>
                   </div>
 
-                  <!-- Video Testimonio 2 -->
                   <div class="bg-white border border-stone-200 p-3.5 rounded-2xl space-y-3 shadow-sm hover:border-amber-300 transition">
                     <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden shadow-inner">
                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/XzLMg-oxRzk" title="Testimonios de Valor - Operación Chavín de Huántar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -611,7 +630,6 @@
                 </p>
               </div>
 
-              <!-- VIDEOS CHAVIN DE HUANTAR -->
               <div class="space-y-3">
                 <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
                   <i class="ph ph-youtube-logo text-red-600 text-lg"></i> Documentales y Entrevistas: Chavín de Huántar
@@ -650,13 +668,11 @@
                 </p>
               </div>
 
-              <!-- VIDEOS GEIN -->
               <div class="space-y-3">
                 <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
                   <i class="ph ph-youtube-logo text-red-600 text-lg"></i> Documentales e Historia: GEIN
                 </h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  <!-- Video GEIN 1 -->
                   <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
                     <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/zEavoZfqyiI" title="Operación Victoria GEIN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -664,7 +680,6 @@
                     <h5 class="font-bold text-xs text-slate-900">Operación Victoria - Documental GEIN</h5>
                     <p class="text-[11px] text-stone-500">Detalles de la investigación de inteligencia policial que derivó en la caída del terrorismo.</p>
                   </div>
-                  <!-- Video GEIN 2 -->
                   <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
                     <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/yL39qfIc30c" title="Captura de Abimael Guzmán GEIN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -672,7 +687,6 @@
                     <h5 class="font-bold text-xs text-slate-900">La Captura del Siglo</h5>
                     <p class="text-[11px] text-stone-500">Historia y testimonio de los agentes del GEIN en la intervención de Surquillo.</p>
                   </div>
-                  <!-- Video GEIN 3 -->
                   <div class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2">
                     <div class="aspect-video bg-stone-900 rounded-xl overflow-hidden">
                       <iframe class="w-full h-full" src="https://www.youtube.com/embed/jkF7mRZ62Qo" title="Agentes del GEIN testimonio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -696,7 +710,7 @@
     </div>
 
     <script>
-        // QUIZ DATA
+        // Banco de preguntas del Desafío XP
         const quizQuestions = [
             {
                 type: "multiple",
@@ -764,22 +778,27 @@
         let totalXP = 0;
         let userSelectedOption = null;
 
-        // WALL POSTS INITIAL DATA
+        // Publicaciones iniciales del Muro Colectivo de Paz
         let wallPosts = [
             { name: "Lucía M.", city: "Lima / 5to de Sec.", text: "Mi compromiso es valorar la democracia y dialogar en vez de agredir. #NuncaMás", date: "Hace 10 min" },
             { name: "Gabriel K.", city: "Ayacucho / Colegio Mariscal Caceres", text: "Honrar la memoria de nuestras comunidades rurales trabajando por el desarrollo de mi región.", date: "Hace 1 hora" },
             { name: "Valeria C.", city: "Arequipa", text: "Aprender historia nos protege de manipular el futuro. ¡Viva la paz en el Perú!", date: "Hace 3 horas" }
         ];
 
-        // INIT APP
+        // Inicialización de la aplicación al cargar el DOM
         window.addEventListener('DOMContentLoaded', () => {
-            renderQuestion();
-            renderWallPosts();
+            try {
+                renderQuestion();
+                renderWallPosts();
+            } catch (error) {
+                console.error("Error al inicializar la aplicación:", error);
+            }
         });
 
-        // TOAST SYSTEM
+        // Sistema de notificaciones Toast
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
+            if (!container) return;
             const toast = document.createElement('div');
             toast.className = `pointer-events-auto px-4 py-3 rounded-xl shadow-xl text-xs font-bold flex items-center gap-2 text-white transition-all duration-300 transform translate-y-2 opacity-0 ${type === 'success' ? 'bg-emerald-600' : 'bg-amber-600'}`;
             toast.innerHTML = `<i class="ph ${type === 'success' ? 'ph-check-circle' : 'ph-info'} text-lg"></i> ${message}`;
@@ -795,7 +814,7 @@
             }, 3000);
         }
 
-        // SCROLL HELPER
+        // Desplazamiento suave hacia secciones
         function scrollToSection(id) {
             const element = document.getElementById(id);
             if (element) {
@@ -803,7 +822,7 @@
             }
         }
 
-        // QUIZ FUNCTIONS
+        // Renderizado de la pregunta actual del Quiz
         function renderQuestion() {
             const q = quizQuestions[currentQuestionIdx];
             document.getElementById('quiz-progress-text').innerText = `Pregunta ${currentQuestionIdx + 1} de ${quizQuestions.length}`;
@@ -826,6 +845,7 @@
             });
         }
 
+        // Evaluación de la respuesta seleccionada
         function selectOption(index) {
             if (userSelectedOption !== null) return;
             userSelectedOption = index;
@@ -857,6 +877,7 @@
             document.getElementById('quiz-next-btn').classList.remove('hidden');
         }
 
+        // Avanzar a la siguiente pregunta o mostrar resultados
         function nextQuestion() {
             if (currentQuestionIdx < quizQuestions.length - 1) {
                 currentQuestionIdx++;
@@ -866,6 +887,7 @@
             }
         }
 
+        // Pantalla final del Quiz
         function showQuizResults() {
             document.getElementById('quiz-card').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
@@ -880,6 +902,7 @@
             `;
         }
 
+        // Reiniciar el Quiz
         function resetQuiz() {
             currentQuestionIdx = 0;
             totalXP = 0;
@@ -889,9 +912,10 @@
             renderQuestion();
         }
 
-        // WALL FUNCTIONS
+        // Renderizar tarjetas del Muro de Paz
         function renderWallPosts() {
             const grid = document.getElementById('wall-posts-grid');
+            if (!grid) return;
             grid.innerHTML = '';
             wallPosts.forEach(post => {
                 const card = document.createElement('div');
@@ -907,6 +931,7 @@
             });
         }
 
+        // Agregar nuevo mensaje al Muro de Paz
         function addWallMessage(e) {
             e.preventDefault();
             const name = document.getElementById('wall-name').value;
@@ -923,15 +948,7 @@
             showToast("¡Tu compromiso ha sido publicado en el Muro!");
         }
 
-        // EBOOK PDF SIMULATION
-        function downloadEbookPDF() {
-            showToast("Generando descarga del E-Book YUYAY (PDF)...", "info");
-            setTimeout(() => {
-                showToast("¡Descarga iniciada con éxito!");
-            }, 1200);
-        }
-
-        // MODAL SLIDE FUNCTIONS
+        // Control del Modal Historia del Terrorismo
         function openTerrorismSlide() {
             document.getElementById('terrorism-slide-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
